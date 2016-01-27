@@ -26,7 +26,8 @@ docker run --name disconf-redis -d redis:3.0
 ```
 2) 启动MySQL服务，在disconf-mysql目录执行
 ```
-docker run --name disconf-mysql -e MYSQL_ROOT_PASSWORD=passw0rd -v ${PWD}/files/sql:/docker-entrypoint-initdb.d -v ${PWD}/data:/var/lib/mysql -d mysql:5.7
+docker run --name disconf-mysql -e MYSQL_ROOT_PASSWORD=passw0rd -v ${PWD}/files/sql:/docker-entrypoint-initdb.d \
+-v ${PWD}/data:/var/lib/mysql -d mysql:5.7
 ```
 3) 创建一个ZooKeeper服务，在disconf-zoo目录下执行
 ```
@@ -36,10 +37,13 @@ docker run --name disconf-zoo -p 2181:2181 -d yourimgs/disconf-zoo
 4) 创建应用服务器镜像，在disconf-app目录下执行
 ```
 docker build -t yourimgs/disconf-app .
-docker run -d --link disconf-mysql:disconf-mysql --link disconf-redis:disconf-redis --link disconf-zoo:disconf-zoo -v /home/ubuntu/disconf-build/working/war:/home/work/dsp/disconf-rd/war --name disconf-app yourimgs/disconf-app
+docker run -d --link disconf-mysql:disconf-mysql --link disconf-redis:disconf-redis --link disconf-zoo:disconf-zoo \
+-v /home/ubuntu/disconf-build/working/war:/home/work/dsp/disconf-rd/war --name disconf-app yourimgs/disconf-app
 ```
 5) 在disconf-nginx目录下执行
 ```
-docker run --name disconf-nginx -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro -v /home/ubuntu/disconf-build/working/war/html:/home/work/dsp/disconf-rd/war/html:ro -v ${PWD}/logs:/home/work/var/logs/disconf -d -p 8081:8081 --link disconf-app:disconf-app nginx:1.9
+docker run --name disconf-nginx -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro \
+-v /home/ubuntu/disconf-build/working/war/html:/home/work/dsp/disconf-rd/war/html:ro -v ${PWD}/logs:/home/work/var/logs/disconf \
+-d -p 8081:8081 --link disconf-app:disconf-app nginx:1.9
 ```
 所有容器启动正常以后，就可以通过http://<yourhost>:8081访问Disconf-web服务了。Disconf的客户端需要访问zookeeper，所以在配置Disconf的客户端时请配置hosts文件，将主机名disconf-zoo映射到Docker所在的服务器上。
