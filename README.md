@@ -10,7 +10,8 @@ docker build -t yourimgs/disconf-build .
 ```
 在disconf-build目录执行以下的命令，打包Disconf-war
 ```
-docker run -v ${PWD}/working:/home/work/dsp/disconf-rd/working -v ${PWD}/config:/home/work/dsp/disconf-rd/online-resources --name disconf-build yourimgs/disconf-build
+docker run -v ${PWD}/working:/home/work/dsp/disconf-rd/working -v ${PWD}/config:/home/work/dsp/disconf-rd/online-resources \
+--name disconf-build yourimgs/disconf-build
 ```
 如果修改了properties文件，可以通过再次启动disconf-build容器来打包
 ```
