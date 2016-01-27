@@ -19,25 +19,25 @@ docker start disconf-build
 ## 使用Docker部署运行Disconf
 如下图所示，Disconf的部署使用到了Nginx, Tomcat, MySQL, Redis和ZooKeeper：
 ![Disconf部署架构](http://git.oschina.net/uploads/images/2016/0127/125722_8de982ee_411046.png "Disconf部署架构")
-* 启动一个Redis服务，执行
+1) 启动一个Redis服务，执行
 ```
 docker run --name disconf-redis -d redis:3.0
 ```
-* 启动MySQL服务，在disconf-mysql目录执行
+2) 启动MySQL服务，在disconf-mysql目录执行
 ```
 docker run --name disconf-mysql -e MYSQL_ROOT_PASSWORD=passw0rd -v ${PWD}/files/sql:/docker-entrypoint-initdb.d -v ${PWD}/data:/var/lib/mysql -d mysql:5.7
 ```
-* 创建一个ZooKeeper服务，在disconf-zoo目录下执行
+3) 创建一个ZooKeeper服务，在disconf-zoo目录下执行
 ```
 docker build -t yourimgs/disconf-zoo .
 docker run --name disconf-zoo -p 2181:2181 -d yourimgs/disconf-zoo
 ```
-* 创建应用服务器镜像，在disconf-app目录下执行
+4) 创建应用服务器镜像，在disconf-app目录下执行
 ```
 docker build -t yourimgs/disconf-app .
 docker run -d --link disconf-mysql:disconf-mysql --link disconf-redis:disconf-redis --link disconf-zoo:disconf-zoo -v /home/ubuntu/disconf-build/working/war:/home/work/dsp/disconf-rd/war --name disconf-app yourimgs/disconf-app
 ```
-* 在disconf-nginx目录下执行
+5) 在disconf-nginx目录下执行
 ```
 docker run --name disconf-nginx -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro -v /home/ubuntu/disconf-build/working/war/html:/home/work/dsp/disconf-rd/war/html:ro -v ${PWD}/logs:/home/work/var/logs/disconf -d -p 8081:8081 --link disconf-app:disconf-app nginx:1.9
 ```
