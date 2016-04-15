@@ -31,9 +31,6 @@ docker-compose up
 ## (非Docker Compose方式)部署运行Disconf
 【说明】本章是早期版本，操作步骤较多。推荐使用前面章节介绍的Docker Compose部署运行。
 
-如下图所示，Disconf的部署使用到了Nginx, Tomcat, MySQL, Redis和ZooKeeper：
-
-![Disconf部署架构](http://git.oschina.net/uploads/images/2016/0127/125722_8de982ee_411046.png "Disconf部署架构")
 1) 启动一个Redis服务，执行
 ```
 docker run --name disconf-redis -d redis:3.0
