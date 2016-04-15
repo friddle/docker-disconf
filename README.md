@@ -10,8 +10,9 @@ docker build -t yourimgs/disconf-build .
 ```
 在disconf-build目录执行以下的命令，打包Disconf-war
 ```
-docker run -v ${PWD}/working:/home/work/dsp/disconf-rd/working -v ${PWD}/config:/home/work/dsp/disconf-rd/online-resources \
---name disconf-build yourimgs/disconf-build
+docker run -v ${PWD}/working:/home/work/dsp/disconf-rd/working \
+    -v ${PWD}/config:/home/work/dsp/disconf-rd/online-resources \
+    --name disconf-build yourimgs/disconf-build
 ```
 如果修改了properties文件，可以通过再次启动disconf-build容器来打包
 ```
@@ -38,7 +39,7 @@ docker run --name disconf-redis -d redis:3.0
 2) 启动MySQL服务，在disconf-mysql目录执行
 ```
 docker run --name disconf-mysql -e MYSQL_ROOT_PASSWORD=passw0rd -v ${PWD}/files/sql:/docker-entrypoint-initdb.d \
--v ${PWD}/data:/var/lib/mysql -d mysql:5.7
+    -v ${PWD}/data:/var/lib/mysql -d mysql:5.7
 ```
 3) 创建一个ZooKeeper服务，在disconf-zoo目录下执行
 ```
