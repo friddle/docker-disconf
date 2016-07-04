@@ -1,6 +1,7 @@
 #简单介绍
 本项目Fork于https://git.oschina.net/gongxusheng/docker-disconf.git   
 修改了Mysql的构建方式。使得对Mac下的Docker命令更加友好, 顺便此项目没有在GitHub上。弄一份贴在GitHub上。
+以下是作者的原介绍
 
 #Docker-Disconf
 Docker-Disconf是本人学习Docker后，尝试使用Docker解决Disconf打包和运行问题的作品。
