@@ -1,3 +1,7 @@
+#简单介绍
+本项目Fork于https://git.oschina.net/gongxusheng/docker-disconf.git   
+修改了Mysql的构建方式。使得对Mac下的Docker命令更加友好, 顺便此项目没有在GitHub上。弄一份贴在GitHub上。
+
 #Docker-Disconf
 Docker-Disconf是本人学习Docker后，尝试使用Docker解决Disconf打包和运行问题的作品。
 Disconf是分布式配置管理平台(Distributed Configuration Management Platform)的简称，使用该平台提供的Web界面，可以统一管理多个应用，多个环境的所有配置。Disconf是一个GitHub上的开源项目，在[https://github.com/knightliao/disconf](https://github.com/knightliao/disconf)可以找到相关的源码和文档。Disconf-web是Disconf的服务器端，提供了用于管理分布式配置的Web界面。
