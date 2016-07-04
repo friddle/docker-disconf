@@ -1,12 +1,7 @@
 disconf-redis:
     image: redis:3.0
 disconf-mysql:
-    image: mysql:5.7
-    volumes:
-        - ../disconf-mysql/files/sql:/docker-entrypoint-initdb.d
-        - ../disconf-mysql/data:/var/lib/mysql
-    environment:
-        - MYSQL_ROOT_PASSWORD=passw0rd
+    build: ../disconf-mysql
 disconf-zoo:
     build: ../disconf-zoo
     ports:
